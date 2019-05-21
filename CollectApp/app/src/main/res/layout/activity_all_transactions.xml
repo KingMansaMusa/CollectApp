@@ -9,7 +9,7 @@
     android:paddingLeft="30dp"
     android:paddingTop="10dp"
     android:paddingRight="30dp"
-    tools:context=".Activities.AccountsActivity">
+    tools:context=".Activities.AllTransactionsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accounts"
+            android:text="Your Transactions"
             android:textColor="@color/text_color"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -32,13 +32,13 @@
             android:background="@color/primary" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/accounts_recycler_view"
+            android:id="@+id/transactions_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:dividerHeight="5dp"
             android:layoutAnimation="@anim/layout_animation_fall_down"
             android:scrollbars="vertical"
-            tools:listitem="@layout/account_list_item" />
+            tools:listitem="@layout/transaction_list_item" />
 
 
     </LinearLayout>

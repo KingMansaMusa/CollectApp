@@ -1,7 +1,9 @@
-package com.starcapital.collectapp;
+package com.starcapital.collectapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.starcapital.collectapp.R;
 
 public class CreateAccountActivity extends AppCompatActivity {
 

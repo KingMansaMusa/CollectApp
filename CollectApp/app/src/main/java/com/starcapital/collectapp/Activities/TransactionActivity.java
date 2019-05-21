@@ -1,14 +1,15 @@
-package com.starcapital.collectapp;
+package com.starcapital.collectapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.starcapital.collectapp.R;
+
+public class TransactionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().show();
+        setContentView(R.layout.activity_transaction);
     }
 }
