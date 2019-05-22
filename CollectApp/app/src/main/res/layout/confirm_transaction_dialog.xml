@@ -20,6 +20,8 @@
             android:textColor="@color/text_color" />
 
         <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/sign_linear_layout"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="200dp">
@@ -34,6 +36,7 @@
             android:weightSum="3">
 
             <Button
+                android:id="@+id/sign_button_cancel"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -47,6 +50,7 @@
                 android:textStyle="normal" />
 
             <Button
+                android:id="@+id/sign_button_clear"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -60,6 +64,7 @@
                 android:textStyle="normal" />
 
             <Button
+                android:id="@+id/sign_button_confirm"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
