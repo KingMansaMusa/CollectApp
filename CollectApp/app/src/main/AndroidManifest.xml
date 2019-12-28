@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.starcapital.collectapp">
+
+    <permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.AllTransactionsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AccountDetailsActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.AccountsActivity" />
+        </activity>
+        <activity android:name=".activities.AccountsActivity" />
+        <activity
+            android:name=".activities.CreateAccountActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activities.MainActivity" />
+        <activity
+            android:name=".activities.TransactionActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:launchMode="singleTop"
+            android:noHistory="true"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".utilities.CaptureSignature"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Signature Confirmation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.starcapital.collectapp.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!-- ressource file to create -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
+
+    </application>
+
+</manifest>

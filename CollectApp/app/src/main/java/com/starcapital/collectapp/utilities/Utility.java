@@ -3,9 +3,13 @@ package com.starcapital.collectapp.utilities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.EditText;
 
 import com.starcapital.collectapp.R;
+
+import java.io.ByteArrayOutputStream;
 
 public class Utility {
 
@@ -53,6 +57,13 @@ public class Utility {
         }
     }
 
+    public Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
 
-
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
 }

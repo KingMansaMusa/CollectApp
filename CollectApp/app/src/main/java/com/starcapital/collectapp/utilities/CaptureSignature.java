@@ -47,6 +47,7 @@ public class CaptureSignature extends Activity {
     private Bitmap mBitmap;
     View mView;
     File mypath;
+    Utility utility;
 
     private String uniqueId;
 
@@ -58,7 +59,7 @@ public class CaptureSignature extends Activity {
         setContentView(R.layout.confirm_transaction_dialog);
         this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-
+        utility = new Utility(getApplicationContext());
 
         tempDir = Environment.getExternalStorageDirectory() + "/" + getResources().getString(R.string.external_dir) + "/";
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -98,7 +99,7 @@ public class CaptureSignature extends Activity {
                             new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
                     Toast.makeText(CaptureSignature.this, "You need to have granted permission", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Log.v("log_tag", "Panel Saved");
                     boolean error = captureSignature();
                     if (!error) {
@@ -106,6 +107,8 @@ public class CaptureSignature extends Activity {
                         mSignature.save(mView);
                         Bundle b = new Bundle();
                         b.putString("status", "done");
+                        byte[] image = utility.getBytes(mBitmap);
+                        b.putByteArray("encodedImage", image);
                         Intent intent = new Intent();
                         intent.putExtras(b);
                         setResult(RESULT_OK, intent);
@@ -114,8 +117,6 @@ public class CaptureSignature extends Activity {
                 }
             }
         });
-
-
 
 
         mCancel.setOnClickListener(new View.OnClickListener() {
