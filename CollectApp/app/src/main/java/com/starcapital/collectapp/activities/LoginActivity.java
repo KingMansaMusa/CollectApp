@@ -1,4 +1,4 @@
-package com.starcapital.collectapp.Activities;
+package com.starcapital.collectapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

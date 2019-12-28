@@ -9,7 +9,7 @@
     android:paddingLeft="30dp"
     android:paddingTop="10dp"
     android:paddingRight="30dp"
-    tools:context=".Activities.CreateAccountActivity">
+    tools:context=".activities.CreateAccountActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,10 +32,12 @@
             android:background="@color/primary" />
 
         <ImageView
+            android:id="@+id/create_account_image"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:layout_width="160dp"
+            android:src="@drawable/ic_picture"
             android:layout_height="180dp" />
 
         <TextView
@@ -46,6 +48,7 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/create_account_number"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -59,6 +62,7 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/create_account_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -72,6 +76,7 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/create_account_contact"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -84,11 +89,14 @@
             android:text="ID Type"
             android:textColor="@color/text_color" />
 
-        <EditText
+        <Spinner
+            android:id="@+id/create_account_id_type"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/edittext_selector" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,10 +106,12 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/create_account_id_number"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@drawable/edittext_selector" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +120,7 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/create_account_officer"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -122,15 +133,20 @@
             android:text="Branch"
             android:textColor="@color/text_color" />
 
-        <EditText
+        <Spinner
+            android:id="@+id/create_account_branch"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/edittext_selector" />
+            android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/create_account_signature"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
+            android:src="@drawable/ic_picture"
             android:layout_height="140dp" />
 
         <LinearLayout
@@ -140,26 +156,28 @@
             android:weightSum="2">
 
             <Button
+                android:id="@+id/create_account_cancel_button"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/cancel_button"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
                 android:textSize="20sp"
                 android:textStyle="normal" />
 
             <Button
+                android:id="@+id/create_account_submit_button"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@color/primary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"

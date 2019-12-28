@@ -1,19 +1,18 @@
-package com.starcapital.collectapp.Activities;
+package com.starcapital.collectapp.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.starcapital.collectapp.R;
-import com.starcapital.collectapp.Utilities.CaptureSignature;
-import com.starcapital.collectapp.Utilities.DialogUtility;
+import com.starcapital.collectapp.utilities.CaptureSignature;
+import com.starcapital.collectapp.utilities.DialogUtility;
 
 public class TransactionActivity extends AppCompatActivity {
 
@@ -26,9 +25,15 @@ public class TransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
+        getSupportActionBar().show();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         dialogUtility = new DialogUtility(TransactionActivity.this);
         init();
+
+        Intent intent = getIntent();
+        int transaction = (int) intent.getSerializableExtra("transaction");
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +51,8 @@ public class TransactionActivity extends AppCompatActivity {
                 startActivityForResult(intent, SIGNATURE_ACTIVITY);
             }
         });
+
+        dialogUtility.showAccountSearchDialog(transaction).show();
 
     }
 
@@ -75,6 +82,10 @@ public class TransactionActivity extends AppCompatActivity {
                         toast.show();
                         byte[] sign = bundle.getByteArray("encodedImage");
                         Log.d("Bundle Breakdown", "  "+bundle.toString());
+
+                        Intent intent = new Intent(TransactionActivity.this, MainActivity.class);
+                        this.startActivity(intent);
+                        TransactionActivity.this.finish();
                     }
                 }
                 break;

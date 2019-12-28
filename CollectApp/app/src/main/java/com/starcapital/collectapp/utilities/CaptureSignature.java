@@ -1,4 +1,4 @@
-package com.starcapital.collectapp.Utilities;
+package com.starcapital.collectapp.utilities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,12 +12,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -27,7 +27,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -57,7 +56,7 @@ public class CaptureSignature extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.confirm_transaction_dialog);
-
+        this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
 
@@ -96,7 +95,7 @@ public class CaptureSignature extends Activity {
                         && ActivityCompat.checkSelfPermission(CaptureSignature.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(CaptureSignature.this,
-                            new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                            new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
                     Toast.makeText(CaptureSignature.this, "You need to have granted permission", Toast.LENGTH_SHORT).show();
                 }else{

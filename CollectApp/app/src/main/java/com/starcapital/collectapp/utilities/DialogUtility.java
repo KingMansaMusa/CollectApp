@@ -1,4 +1,4 @@
-package com.starcapital.collectapp.Utilities;
+package com.starcapital.collectapp.utilities;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,10 +13,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.starcapital.collectapp.Activities.MainActivity;
-import com.starcapital.collectapp.Activities.TransactionActivity;
+import com.starcapital.collectapp.activities.MainActivity;
 import com.starcapital.collectapp.R;
 
 public class DialogUtility {
@@ -44,7 +42,7 @@ public class DialogUtility {
         return progressDialog;
     }
 
-    public Dialog showAccountSearchDialog() {
+    public Dialog showAccountSearchDialog(final int transaction) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -54,6 +52,7 @@ public class DialogUtility {
         final EditText editTextAccountNumber = dialog.findViewById(R.id.account_search_acc_number);
         Button buttonCancel = dialog.findViewById(R.id.account_search_button_cancel);
         Button buttonSearch = dialog.findViewById(R.id.account_search_button_search);
+
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +75,7 @@ public class DialogUtility {
 
                 } else {
                     dialog.dismiss();
-                    utility.setAccount((Activity) context, acc_number);
+                    utility.setAccount((Activity) context, acc_number,transaction);
                 }
 
             }

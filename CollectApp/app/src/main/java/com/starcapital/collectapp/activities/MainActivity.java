@@ -1,4 +1,4 @@
-package com.starcapital.collectapp.Activities;
+package com.starcapital.collectapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().show();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
         init();
 
@@ -26,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
+                intent.putExtra("transaction", 1);
                 startActivity(intent);
             }
         });
@@ -34,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View view) {
 //                Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
+//                intent.putExtra("transaction", 2);
 //                startActivity(intent);
 //            }
 //        });
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View view) {
 //                Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
+//                intent.putExtra("transaction", 3);
 //                startActivity(intent);
 //            }
 //        });
