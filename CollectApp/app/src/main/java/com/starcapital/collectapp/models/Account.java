@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
 
-    private int accountNumber;
+    private String accountNumber;
     private String accountName;
     private String contact;
     private String idType;
@@ -18,11 +18,11 @@ public class Account implements Serializable {
 
     }
 
-    public int getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
