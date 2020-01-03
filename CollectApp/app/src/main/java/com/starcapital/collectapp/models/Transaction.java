@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Transaction implements Serializable {
 
-    private int accountNumber;
+    private String accountNumber;
     private String accountName;
     private String TransactionType;
     private double amount;
@@ -16,11 +16,11 @@ public class Transaction implements Serializable {
 
     }
 
-    public int getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 

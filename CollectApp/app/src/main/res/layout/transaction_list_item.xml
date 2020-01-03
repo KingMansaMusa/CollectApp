@@ -12,12 +12,14 @@
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/transaction_list_image_layout"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="5dp"
             android:background="@drawable/circular_layout">
 
             <ImageView
+                android:id="@+id/transaction_list_image_view"
                 android:src="@drawable/ic_deposits_white"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -38,6 +40,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/transition_list_account_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -51,6 +54,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/transition_list_account_name"
                         android:ellipsize="end"
                         android:layout_alignParentLeft="true"
                         android:layout_width="wrap_content"
@@ -62,6 +66,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/transition_list_amount"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

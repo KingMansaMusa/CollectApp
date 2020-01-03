@@ -33,12 +33,13 @@
 
         <ImageView
             android:id="@+id/create_account_image"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center"
-            android:scaleType="centerInside"
             android:layout_width="160dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_picture"
-            android:layout_height="180dp" />
+            android:tag="noset" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,7 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:background="@drawable/edittext_selector" />
+            android:background="@drawable/edittext_selector"
+            android:enabled="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,7 +126,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:background="@drawable/edittext_selector" />
+            android:background="@drawable/edittext_selector"
+            android:enabled="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -144,10 +147,11 @@
 
         <ImageView
             android:id="@+id/create_account_signature"
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_picture"
-            android:layout_height="140dp" />
+            android:tag="noset" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -157,12 +161,12 @@
 
             <Button
                 android:id="@+id/create_account_cancel_button"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/cancel_button"
+                android:gravity="center"
                 android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
@@ -171,12 +175,12 @@
 
             <Button
                 android:id="@+id/create_account_submit_button"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@color/primary"
+                android:gravity="center"
                 android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

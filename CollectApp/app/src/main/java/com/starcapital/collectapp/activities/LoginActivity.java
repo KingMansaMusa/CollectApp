@@ -1,5 +1,6 @@
 package com.starcapital.collectapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,12 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.starcapital.collectapp.R;
+import com.starcapital.collectapp.utilities.DialogUtility;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText editTextUsername, editTextPassword;
     Button buttonLogin;
     String password, username;
+    DialogUtility dialogUtility;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.login_password);
         editTextUsername = findViewById(R.id.login_username);
         buttonLogin = findViewById(R.id.login_button);
+        context = LoginActivity.this;
+        dialogUtility = new DialogUtility(context);
 
     }
 
