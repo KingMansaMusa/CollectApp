@@ -32,6 +32,7 @@
             android:background="@color/primary" />
 
         <ImageView
+            android:id="@+id/account_details_account_photo"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
@@ -46,6 +47,8 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/account_details_account_number"
+            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -59,6 +62,7 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/account_details_account_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -72,6 +76,7 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/account_details_contact"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -84,11 +89,14 @@
             android:text="ID Type"
             android:textColor="@color/text_color" />
 
-        <EditText
+        <Spinner
+            android:id="@+id/account_details_id_type"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/edittext_selector" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,6 +106,7 @@
             android:textColor="@color/text_color" />
 
         <EditText
+            android:id="@+id/account_details_id_number"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -106,10 +115,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Officer Name"
+            android:text="Officer"
             android:textColor="@color/text_color" />
 
         <EditText
+            android:enabled="false"
+            android:id="@+id/account_details_officer"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="5dp"
@@ -122,13 +133,17 @@
             android:text="Branch"
             android:textColor="@color/text_color" />
 
-        <EditText
+        <Spinner
+            android:id="@+id/account_details_branch"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/edittext_selector" />
+            android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/account_details_account_signature"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="140dp" />
@@ -140,6 +155,7 @@
             android:weightSum="2">
 
             <Button
+                android:id="@+id/account_details_cancel_button"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -153,13 +169,14 @@
                 android:textStyle="normal" />
 
             <Button
+                android:id="@+id/account_details_edit_button"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@color/primary"
-                android:text="Submit"
+                android:text="Edit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
