@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Star Capital</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="submit">submit</string>
+
+    <string name="account_number">Account Number</string>
+    <string name="account_name">Account Name</string>
+
+    <string-array name="account_search_types">
+        <item>Account Number</item>
+        <item>Account Name</item>
+    </string-array>
+
+    <string-array name="id_types">
+        <item>Passport</item>
+        <item>Drivers License</item>
+        <item>NHIS</item>
+        <item>Ghana Card</item>
+        <item>Mobile Phone</item>
+    </string-array>
+
+    <string-array name="branches">
+        <item>Lapaz</item>
+    </string-array>
+
+    <string name="external_dir">GetSignature</string>
+    <string name="deposit">Deposit</string>
+    <string name="loan">Loan</string>
+    <string name="withdrawal">Withdrawal</string>
+</resources>
