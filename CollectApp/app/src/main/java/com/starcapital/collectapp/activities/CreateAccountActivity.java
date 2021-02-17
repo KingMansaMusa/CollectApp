@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,17 +24,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.starcapital.collectapp.R;
+import com.starcapital.collectapp.database.viewmodels.AccountsViewModel;
 import com.starcapital.collectapp.models.Account;
+import com.starcapital.collectapp.models.CardType;
 import com.starcapital.collectapp.utilities.CaptureSignature;
 import com.starcapital.collectapp.utilities.DialogUtility;
 import com.starcapital.collectapp.utilities.Utility;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static com.starcapital.collectapp.activities.TransactionActivity.SIGNATURE_ACTIVITY;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -44,11 +43,14 @@ public class CreateAccountActivity extends AppCompatActivity {
     Spinner spinnerIDType, spinnerBranch;
     Button buttonCancel, buttonSubmit;
 
+    List<CardType> cardTypesList = new ArrayList<>();
+
+    private AccountsViewModel viewModel;
+
     // Activity request codes
     private static final int CAMERA_REQUEST = 1888;
 
     public static final int MEDIA_TYPE_IMAGE = 1;
-
 
     // directory name to store captured images
     private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
@@ -65,8 +67,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         getSupportActionBar().show();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
+        viewModel = new ViewModelProvider(this).get(AccountsViewModel.class);
         init();
+
+        viewModel.getCardTypes().observe(this, cardTypes -> {
+            cardTypesList = cardTypes;
+        });
 
         imageViewAccPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,9 +113,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
-        final ArrayAdapter<String> idTypeAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.id_types));
+        final ArrayAdapter<CardType> idTypeAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_dropdown_item, cardTypesList);
         spinnerIDType.setAdapter(idTypeAdapter);
 
         final ArrayAdapter<String> branchAdapter = new ArrayAdapter<>(
@@ -193,6 +198,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if the result is capturing Image
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageViewAccPhoto.setImageBitmap(photo);

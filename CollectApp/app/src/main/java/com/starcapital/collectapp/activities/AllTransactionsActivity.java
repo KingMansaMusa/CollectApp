@@ -1,15 +1,13 @@
 package com.starcapital.collectapp.activities;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.starcapital.collectapp.R;
-import com.starcapital.collectapp.adapters.AccountsRecyclerAdapter;
 import com.starcapital.collectapp.adapters.TransactionsRecyclerAdapter;
-import com.starcapital.collectapp.models.Account;
 import com.starcapital.collectapp.models.Transaction;
 import com.starcapital.collectapp.utilities.DialogUtility;
 

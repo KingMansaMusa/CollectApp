@@ -1,24 +1,31 @@
 package com.starcapital.collectapp.activities;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.starcapital.collectapp.R;
 import com.starcapital.collectapp.utilities.DialogUtility;
+import com.starcapital.collectapp.utilities.LoginHelper;
+
+import net.openid.appauth.AuthorizationException;
+import net.openid.appauth.AuthorizationResponse;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextPassword;
+    int LOGIN_RESULT_CODE = 1;
     Button buttonLogin;
-    String password, username;
+    LoginHelper loginHelper;
     DialogUtility dialogUtility;
+    PendingIntent pendingIntentSuccess, pendingIntentCancel;
     Context context;
 
     @Override
@@ -32,46 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                password = editTextPassword.getText().toString();
-                username = editTextUsername.getText().toString();
-
-                validate(username, password);
-
-            }
-        });
-
-        editTextUsername.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editTextUsername.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        editTextPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editTextPassword.setError(null);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+                loginHelper.authenticate();
             }
         });
 
@@ -79,28 +47,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private void init() {
 
-        editTextPassword = findViewById(R.id.login_password);
-        editTextUsername = findViewById(R.id.login_username);
         buttonLogin = findViewById(R.id.login_button);
         context = LoginActivity.this;
         dialogUtility = new DialogUtility(context);
+        pendingIntentSuccess = PendingIntent.getActivity(LoginActivity.this, 0, new Intent(LoginActivity.this, MainActivity.class), 0);
+        pendingIntentCancel = PendingIntent.getActivity(LoginActivity.this, 0, new Intent(LoginActivity.this, LoginActivity.class), 0);
+        loginHelper = new LoginHelper(LoginActivity.this, pendingIntentSuccess, pendingIntentCancel, true);
 
     }
-
-    private void validate(String user, String pass) {
-
-        if (pass.isEmpty() && user.isEmpty()) {
-            editTextUsername.setError("Please enter your Username");
-            editTextPassword.setError("Please enter your Password");
-        } else if (pass.isEmpty()) {
-            editTextPassword.setError("Please enter your Password");
-        } else if (user.isEmpty()) {
-            editTextUsername.setError("Please enter your Username");
-        } else {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+    //This method receives the data from the browser when login is successful or canceled and acts accordingly
+    //The method adds the intent data which will be received in the pendingIntent for when login is successful
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOGIN_RESULT_CODE) {
+            AuthorizationResponse resp = AuthorizationResponse.fromIntent(data);
+            AuthorizationException ex = AuthorizationException.fromIntent(data);
+            loginHelper.showData(resp, ex);
+            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            finish();
+            // ... process the response or exception ...
         }
-
     }
 
 }

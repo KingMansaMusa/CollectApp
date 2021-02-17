@@ -2,14 +2,23 @@ package com.starcapital.collectapp.utilities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import com.starcapital.collectapp.R;
 
+import net.openid.appauth.AuthState;
+
+import org.json.JSONException;
+
 import java.io.ByteArrayOutputStream;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Utility {
 
@@ -65,5 +74,39 @@ public class Utility {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
+    }
+
+    public boolean getLogout() {
+        boolean isLogout;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Credentials", MODE_PRIVATE);
+        isLogout = sharedPreferences.getBoolean("isLogout", false);
+        return isLogout;
+    }
+
+    public void setLogout(boolean isLogout) {
+        SharedPreferences sp = context.getSharedPreferences("auth", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = sp.edit();
+        Ed.putBoolean("isLogout", isLogout);
+        Ed.apply();
+    }
+
+    //This method save the AuthState in the Shared Preference so that it can be accessed throughout the whole application
+    public void writeAuthState(@NonNull AuthState state) {
+        SharedPreferences authPrefs = context.getSharedPreferences("auth", MODE_PRIVATE);
+        authPrefs.edit()
+                .putString("stateJson", state.jsonSerializeString())
+                .apply();
+    }
+
+    //This method reads the saved AuthState from the Shared Prefernce so that it can be used for network requests
+    @NonNull
+    public AuthState readAuthState() throws JSONException {
+        SharedPreferences authPrefs = context.getSharedPreferences("auth", MODE_PRIVATE);
+        String stateJson = authPrefs.getString("stateJson", null);
+        if (stateJson != null) {
+            return AuthState.jsonDeserialize(stateJson);
+        } else {
+            return new AuthState();
+        }
     }
 }

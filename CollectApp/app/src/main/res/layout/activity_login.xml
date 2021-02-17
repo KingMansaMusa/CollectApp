@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activities.LoginActivity">
+    tools:context="com.starcapital.collectapp.activities.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="STAR CAPITAL MICROFINANCE"
+                android:text="SAVE RIGHT SUSU ENTERPRISE"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -68,8 +68,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
             android:text="Login"
             android:textColor="@color/text_color"
             android:textSize="30sp"
@@ -81,26 +79,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@color/primary" />
-
-        <EditText
-            android:inputType="textPersonName"
-            android:id="@+id/login_username"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/edittext_selector"
-            android:drawableLeft="@drawable/ic_user"
-            android:hint="Username" />
-
-        <EditText
-            android:inputType="textPassword"
-            android:id="@+id/login_password"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/edittext_selector"
-            android:drawableLeft="@drawable/ic_password"
-            android:hint="Password" />
 
         <Button
             android:id="@+id/login_button"
