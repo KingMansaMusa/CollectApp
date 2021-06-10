@@ -31,8 +31,9 @@
     <string name="withdrawal">Withdrawal</string>
     <string name="login_client_id">saveright-mobile</string>
     <string name="login_redirect_uri">com.starcapital.collectapp:/callback</string>
-    <string name="login_idp_endpoint">https://li1484-244.members.linode.com/auth/realms/saveright</string>
-    <string name="base_url">https://li1484-244.members.linode.com/</string>
+    <string name="login_idp_endpoint">https://saveright.app/auth/realms/saveright</string>
+<!--    <string name="base_url">https://saveright.app/</string>-->
+    <string name="base_url">https://lgtech.online/</string>
     <string name="bearer_token" translatable="false">Bearer %1s</string>
     <string name="authorization_header" translatable="false">Authorization</string>
 </resources>

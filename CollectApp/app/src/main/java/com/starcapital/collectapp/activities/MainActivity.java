@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_setups:
                 try {
                     networkCalls.saveCardTypes();
+                    networkCalls.saveBranches();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

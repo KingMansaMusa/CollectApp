@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
+import com.starcapital.collectapp.models.Branch;
 import com.starcapital.collectapp.models.CardType;
 
 import java.util.List;
@@ -16,12 +17,21 @@ import java.util.List;
 public interface AccountsDao {
 
     @Query("SELECT * FROM card_type")
-    LiveData<List<CardType>> getCardTypes();
+    List<CardType> getCardTypes();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void saveCardTypes(List<CardType> cardTypes);
 
     @Delete
     void deleteCardType(CardType cardType);
+
+    @Query("SELECT * FROM branch")
+    List<Branch> getBranches();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void saveBranches(List<Branch> branches);
+
+    @Delete
+    void deleteBranch(Branch branch);
 
 }

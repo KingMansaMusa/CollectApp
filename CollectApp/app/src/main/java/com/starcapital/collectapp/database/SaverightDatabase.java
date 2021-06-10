@@ -7,12 +7,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.starcapital.collectapp.models.Branch;
 import com.starcapital.collectapp.models.CardType;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {CardType.class}, version = 1)
+@Database(entities = {CardType.class, Branch.class}, version = 1)
 @TypeConverters(MyTypeConverters.class)
 public abstract class SaverightDatabase extends RoomDatabase {
     public abstract AccountsDao accountsDao();

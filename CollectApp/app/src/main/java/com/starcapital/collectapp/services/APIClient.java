@@ -38,26 +38,26 @@ public class APIClient {
         //The client interceptor monitors, rewrite and retry calls. The logging interceptor is added to the client interceptor
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-        authState.performActionWithFreshTokens(authorizationService, (accessToken, idToken, ex) -> {
-
-            if (ex != null) {
-                // negotiation for fresh tokens failed, check ex for more details
-                Log.w("EXCEPTION TOKEN", "" + ex);
-                return;
-            }
-            httpClient.addInterceptor(chain -> {
-                Request original = chain.request();
-
-                // Request customization: add request headers
-                Request.Builder requestBuilder = original.newBuilder()
-                        .header(res.getString(R.string.authorization_header),
-                                res.getString(R.string.bearer_token, accessToken)); // <-- this is the important line
-                assert accessToken != null;
-                Log.i("TOKEN", accessToken);
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            });
-        });
+//        authState.performActionWithFreshTokens(authorizationService, (accessToken, idToken, ex) -> {
+//
+//            if (ex != null) {
+//                // negotiation for fresh tokens failed, check ex for more details
+//                Log.w("EXCEPTION TOKEN", "" + ex);
+//                return;
+//            }
+//            httpClient.addInterceptor(chain -> {
+//                Request original = chain.request();
+//
+//                // Request customization: add request headers
+//                Request.Builder requestBuilder = original.newBuilder()
+//                        .header(res.getString(R.string.authorization_header),
+//                                res.getString(R.string.bearer_token, accessToken)); // <-- this is the important line
+//                assert accessToken != null;
+//                Log.i("TOKEN", accessToken);
+//                Request request = requestBuilder.build();
+//                return chain.proceed(request);
+//            });
+//        });
 
         OkHttpClient client = httpClient
                 .addInterceptor(interceptor)

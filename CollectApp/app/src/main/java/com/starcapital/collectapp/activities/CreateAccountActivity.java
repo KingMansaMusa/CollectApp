@@ -11,6 +11,7 @@ import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.starcapital.collectapp.R;
 import com.starcapital.collectapp.database.viewmodels.AccountsViewModel;
 import com.starcapital.collectapp.models.Account;
+import com.starcapital.collectapp.models.Branch;
 import com.starcapital.collectapp.models.CardType;
 import com.starcapital.collectapp.utilities.CaptureSignature;
 import com.starcapital.collectapp.utilities.DialogUtility;
@@ -70,9 +72,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(AccountsViewModel.class);
         init();
 
-        viewModel.getCardTypes().observe(this, cardTypes -> {
-            cardTypesList = cardTypes;
-        });
+        new GetCards().execute();
 
         imageViewAccPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,15 +112,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        final ArrayAdapter<CardType> idTypeAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, cardTypesList);
-        spinnerIDType.setAdapter(idTypeAdapter);
-
-        final ArrayAdapter<String> branchAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.branches));
-        spinnerBranch.setAdapter(branchAdapter);
 
         editTextAccName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -261,6 +252,34 @@ public class CreateAccountActivity extends AppCompatActivity {
 
 
         return state;
+    }
+
+    public class GetCards extends AsyncTask<Void, Void, String> {
+        List<CardType> cardTypes;
+        List<Branch> branches;
+
+        @Override
+        protected String doInBackground(Void... objects) {
+            cardTypes = viewModel.getCardTypes();
+            branches = viewModel.getBranches();
+            Log.d("CARDS RETRIEVED", "FROM DB");
+            return "Successful";
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ArrayAdapter<CardType> idTypeAdapter = new ArrayAdapter<>(
+                    CreateAccountActivity.this, android.R.layout.simple_spinner_dropdown_item, cardTypes);
+            spinnerIDType.setAdapter(idTypeAdapter);
+
+            final ArrayAdapter<Branch> branchAdapter = new ArrayAdapter<>(
+                    CreateAccountActivity.this, android.R.layout.simple_spinner_dropdown_item,branches);
+            spinnerBranch.setAdapter(branchAdapter);
+
+        }
     }
 
 }

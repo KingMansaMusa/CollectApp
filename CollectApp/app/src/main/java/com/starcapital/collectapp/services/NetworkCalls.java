@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.starcapital.collectapp.database.viewmodels.AccountsViewModel;
+import com.starcapital.collectapp.models.Branch;
 import com.starcapital.collectapp.models.CardType;
 import com.starcapital.collectapp.utilities.DialogUtility;
 import com.starcapital.collectapp.utilities.Utility;
@@ -60,23 +61,32 @@ public class NetworkCalls {
                 Log.d("GETTING CARDS FAILED---", t.toString());
             }
         });
+    }
 
 
-//        try {
-//            Call<List<CardType>> call = apiInterface.getCardTypes();
-//            Response<List<CardType>> response = call.execute();
-//            if (response.isSuccessful()) {
-//                Log.d("GETTING CARDS GOOD--", response.toString());
-//                new SaveCards().execute(response.body());
-//                dialog.dismiss();
-//            } else {
-//                Log.d("GETTING CARDS BAD--", response.code() + " " + response.body());
-//                dialog.dismiss();
-//            }
-//        } catch (IOException ex) {
-//            Log.d("GETTING CARDS FAILED---", ex.toString());
-//            dialog.dismiss();
-//        }
+    public void saveBranches() throws JSONException {
+        dialog.show();
+        apiInterface = APIClient.getClient(context).create(APIInterface.class);
+        Call<List<Branch>> call = apiInterface.getBranches();
+        call.enqueue(new Callback<List<Branch>>() {
+            @Override
+            public void onResponse(Call<List<Branch>> call, Response<List<Branch>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("GETTING CARDS GOOD--", response.toString());
+                    new SaveBranches().execute(response.body());
+                    dialog.dismiss();
+                } else{
+                    Log.d("GETTING CARDS BAD--", response.code() + " " + response.body());
+                    dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Branch>> call, Throwable t) {
+                dialog.dismiss();
+                Log.d("GETTING CARDS FAILED---", t.toString());
+            }
+        });
     }
 
     public class SaveCards extends AsyncTask<Object, Void, String> {
@@ -85,6 +95,24 @@ public class NetworkCalls {
         protected String doInBackground(Object... objects) {
             List<CardType> cardTypes = (List<CardType>) objects[0];
             viewModel.saveCards(cardTypes);
+            Log.d("CARDS INSERTED", "FROM WEB");
+            return "Successful";
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+    }
+
+    public class SaveBranches extends AsyncTask<Object, Void, String> {
+
+        @Override
+        protected String doInBackground(Object... objects) {
+            List<Branch> branches = (List<Branch>) objects[0];
+            viewModel.saveBranches(branches);
+            Log.d("BRANCHES INSERTED", "FROM WEB");
             return "Successful";
 
         }
