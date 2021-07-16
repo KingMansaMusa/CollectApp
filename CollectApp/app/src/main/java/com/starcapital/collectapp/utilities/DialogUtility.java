@@ -21,6 +21,9 @@ import android.widget.TextView;
 
 import com.starcapital.collectapp.activities.MainActivity;
 import com.starcapital.collectapp.R;
+import com.starcapital.collectapp.services.NetworkCalls;
+
+import org.json.JSONException;
 
 public class DialogUtility {
 
@@ -115,7 +118,8 @@ public class DialogUtility {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.accounts_dialog);
 
-
+        NetworkCalls networkCalls = new NetworkCalls(context);
+        final boolean[] accountNumber = {true};
         final Spinner spinnerSearchType = dialog.findViewById(R.id.accounts_search_type);
         final TextView textViewParameter = dialog.findViewById(R.id.accounts_parameter_text);
         final EditText editTextParameter = dialog.findViewById(R.id.accounts_parameter);
@@ -135,10 +139,12 @@ public class DialogUtility {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinnerSearchType.getSelectedItem().toString().equals(context.getResources().getString(R.string.account_number))) {
                     textViewParameter.setText(R.string.account_number);
+                    accountNumber[0] = true;
                     editTextParameter.setRawInputType(InputType.TYPE_CLASS_NUMBER);
                 } else {
                     textViewParameter.setText(R.string.account_name);
                     editTextParameter.setRawInputType(InputType.TYPE_CLASS_TEXT);
+                    accountNumber[0] = false;
                 }
             }
 
@@ -155,6 +161,7 @@ public class DialogUtility {
                 dialog.dismiss();
                 context.startActivity(intent);
                 ((Activity) context).finish();
+
             }
         });
 
@@ -162,13 +169,25 @@ public class DialogUtility {
             @Override
             public void onClick(View view) {
 
-                String acc_number = editTextParameter.getText().toString();
+                String search = editTextParameter.getText().toString();
+                String acc_number = "accountNumber";
+                String acc_name = "accountName";
+                String agent = "mobile";
+                int size = 100;
 
-                if (acc_number.isEmpty()) {
+                if (search.isEmpty()) {
                     editTextParameter.setError("Please enter a Parameter to search");
 
-                }
-                else {
+                } else {
+                    try {
+                        if (accountNumber[0]) {
+                            networkCalls.getAccounts(search, acc_number, size, agent);
+                        } else {
+                            networkCalls.getAccounts(search, acc_name, size, agent);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     dialog.dismiss();
                 }
 

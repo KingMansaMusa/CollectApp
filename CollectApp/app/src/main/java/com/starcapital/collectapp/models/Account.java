@@ -1,12 +1,15 @@
 package com.starcapital.collectapp.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+
 
 public class Account implements Serializable {
 
     private String accountNumber;
     private String accountName;
-    private String contact;
+    private String accountContact;
     private String idType;
     private String idNumber;
     private String officer;
@@ -34,12 +37,12 @@ public class Account implements Serializable {
         this.accountName = accountName;
     }
 
-    public String getContact() {
-        return contact;
+    public String getAccountContact() {
+        return accountContact;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setAccountContact(String accountContact) {
+        this.accountContact = accountContact;
     }
 
     public String getIdType() {

@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     networkCalls.saveCardTypes();
                     networkCalls.saveBranches();
+                    networkCalls.getAccounts("nana", "accountName", 1000, "mobile");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

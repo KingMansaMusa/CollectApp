@@ -1,5 +1,6 @@
 package com.starcapital.collectapp.services;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,17 +8,26 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.starcapital.collectapp.R;
+import com.starcapital.collectapp.activities.AccountsActivity;
+import com.starcapital.collectapp.adapters.AccountsRecyclerAdapter;
 import com.starcapital.collectapp.database.viewmodels.AccountsViewModel;
+import com.starcapital.collectapp.models.Account;
+import com.starcapital.collectapp.models.AccountSubset;
 import com.starcapital.collectapp.models.Branch;
 import com.starcapital.collectapp.models.CardType;
 import com.starcapital.collectapp.utilities.DialogUtility;
 import com.starcapital.collectapp.utilities.Utility;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,6 +98,34 @@ public class NetworkCalls {
             }
         });
     }
+
+    public void getAccounts(String search, String sort, int size, String agent) throws JSONException {
+        dialog.show();
+        apiInterface = APIClient.getClient(context).create(APIInterface.class);
+        Call<List<AccountSubset>> call = apiInterface.getAccounts(search, sort, size, agent);
+        call.enqueue(new Callback<List<AccountSubset>>() {
+            @Override
+            public void onResponse(Call<List<AccountSubset>> call, Response<List<AccountSubset>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("GETTING ACCOUNTS GOOD--", response.body().toString());
+                    ((AccountsActivity) context).addData(response.body());
+
+                    dialog.dismiss();
+                } else{
+                    Log.d("GETTING ACCOUNTS BAD--", response.code() + " " + response.body());
+                    dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AccountSubset>> call, Throwable t) {
+                dialog.dismiss();
+                Log.d("GETTING ACCOUNTS FAILED---", t.toString());
+            }
+        });
+    }
+
+
 
     public class SaveCards extends AsyncTask<Object, Void, String> {
 

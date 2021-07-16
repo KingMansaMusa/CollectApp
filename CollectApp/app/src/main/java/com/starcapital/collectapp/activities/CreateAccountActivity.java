@@ -212,7 +212,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private Account submit() {
         Account account = new Account();
         account.setAccountName(editTextAccName.getText().toString());
-        account.setContact(editTextContact.getText().toString());
+        account.setAccountContact(editTextContact.getText().toString());
         account.setIdType(spinnerIDType.getSelectedItem().toString());
         account.setIdNumber(editTextIDNum.getText().toString());
         account.setOfficer(editTextOfficer.getText().toString());

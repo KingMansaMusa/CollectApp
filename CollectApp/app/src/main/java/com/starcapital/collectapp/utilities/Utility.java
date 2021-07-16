@@ -10,13 +10,17 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.starcapital.collectapp.R;
+import com.starcapital.collectapp.models.Account;
 
 import net.openid.appauth.AuthState;
 
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
+import java.time.ZonedDateTime;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -108,5 +112,11 @@ public class Utility {
         } else {
             return new AuthState();
         }
+    }
+
+    public Gson getCustomGson() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+//        gsonBuilder.registerTypeAdapter(Account.class, new AccountsDeserializer());
+        return gsonBuilder.create();
     }
 }

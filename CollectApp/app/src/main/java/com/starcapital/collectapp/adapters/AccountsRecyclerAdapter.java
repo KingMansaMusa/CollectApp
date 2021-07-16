@@ -12,15 +12,17 @@ import android.widget.TextView;
 import com.starcapital.collectapp.R;
 import com.starcapital.collectapp.activities.AccountDetailsActivity;
 import com.starcapital.collectapp.models.Account;
+import com.starcapital.collectapp.models.AccountSubset;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AccountsRecyclerAdapter extends RecyclerView.Adapter<AccountsRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<Account> accounts;
+    private List<AccountSubset> accounts;
     Context context;
 
-    public AccountsRecyclerAdapter(ArrayList<Account> accounts) {
+    public AccountsRecyclerAdapter(List<AccountSubset> accounts) {
         this.accounts = accounts;
     }
 
@@ -39,10 +41,10 @@ public class AccountsRecyclerAdapter extends RecyclerView.Adapter<AccountsRecycl
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
-        Account account = accounts.get(i);
+        AccountSubset account = accounts.get(i);
         viewHolder.textViewAccountNumber.setText(account.getAccountNumber());
         viewHolder.textViewAccountName.setText(account.getAccountName());
-        viewHolder.textViewPhoneNumber.setText(account.getContact());
+        viewHolder.textViewPhoneNumber.setText(account.getAccountContact());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,12 +55,12 @@ public class AccountsRecyclerAdapter extends RecyclerView.Adapter<AccountsRecycl
         });
     }
 
-    public void add(int position, Account account) {
+    public void add(int position, AccountSubset  account) {
         accounts.add(position, account);
         notifyItemInserted(position);
     }
 
-    public void addAll(ArrayList<Account> newAccounts) {
+    public void addAll(List<AccountSubset> newAccounts) {
         accounts.addAll(newAccounts);
         notifyDataSetChanged();
     }
